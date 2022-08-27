@@ -1,0 +1,18 @@
+{
+    "languageserver": {
+        "golang": {
+            "command": "gopls",
+            "rootPatterns": [
+                "go.mod"
+            ],
+            "filetypes": [
+                "go"
+            ]
+        }
+    },
+    "suggest.noselect": false,
+    "coc.preferences.diagnostic.displayByAle": true,
+    "suggest.floatEnable": true,
+    "explorer.file.showHiddenFiles": true,
+    "explorer.icon.enableNerdfont": true
+}
