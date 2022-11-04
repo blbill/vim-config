@@ -3,6 +3,7 @@
 " Settings:
 " - g:disable_mappings - Set true to disable this file entirely.
 " - g:enable_universal_quit_mapping - Toggle 'q' for :quit mapping.
+" - g:elite_mode - Enable to map arrow keys to window resize.
 
 if get(g:, 'disable_mappings')
 	finish
@@ -28,16 +29,17 @@ endif
 nmap <Leader><Leader> V
 xmap <Leader><Leader> <Esc>
 
-" Toggle fold
-nnoremap <CR> za
+" Toggle fold or select option from popup menu
+nnoremap <expr><CR> pumvisible() ? '<CR>' : 'za'
 
 " Focus the current fold by closing all others
 nnoremap <S-Return> zMzv
 
-" The plugin rhysd/accelerated-jk moves through display-lines in normal mode,
-" these mappings will move through display-lines in visual mode too.
-xnoremap j gj
-xnoremap k gk
+" Moves through display-lines, unless count is provided.
+nnoremap <expr> j v:count > 0 ? "m'" . v:count . 'j' : 'gj'
+nnoremap <expr> k v:count > 0 ? "m'" . v:count . 'k' : 'gk'
+xnoremap <expr> j v:count > 0 ? "m'" . v:count . 'j' : 'gj'
+xnoremap <expr> k v:count > 0 ? "m'" . v:count . 'k' : 'gk'
 
 " Easier line-wise movement
 nnoremap gh g^
@@ -274,6 +276,9 @@ nnoremap <Leader>S ^vg_y:execute @@<CR>:echo 'Sourced line.'<CR>
 " Jump entire buffers in jumplist
 nnoremap g<C-i> <cmd>call <SID>jump_buffer(-1)<CR>
 nnoremap g<C-o> <cmd>call <SID>jump_buffer(1)<CR>
+
+" Context aware menu. See lua/contextmenu.lua
+nnoremap <LocalLeader>c  <cmd>lua require'contextmenu'.show()<CR>
 
 if has('mac')
 	" Open the macOS dictionary on current word
@@ -560,11 +565,6 @@ if dein#tap('vim-niceblock')
 	silent! xmap I  <Plug>(niceblock-I)
 	silent! xmap gI <Plug>(niceblock-gI)
 	silent! xmap A  <Plug>(niceblock-A)
-endif
-
-if dein#tap('accelerated-jk')
-	nmap <silent> j <Plug>(accelerated_jk_gj)
-	nmap <silent> k <Plug>(accelerated_jk_gk)
 endif
 
 if dein#tap('vim-edgemotion')
