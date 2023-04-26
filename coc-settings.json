@@ -2,12 +2,13 @@
     "languageserver": {
         "golang": {
             "command": "gopls",
-            "rootPatterns": [
-                "go.mod"
-            ],
-            "filetypes": [
-                "go"
-            ]
+            "rootPatterns": ["go.mod"],
+            "filetypes": ["go"]
+        },
+        "csharp-ls": {
+          "command": "csharp-ls",
+          "filetypes": ["cs"],
+          "rootPatterns": ["*.csproj"]
         }
     },
     "suggest.noselect": false,

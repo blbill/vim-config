@@ -39,6 +39,19 @@ require('null-ls').setup({
 		-- Javascript
 		builtins.diagnostics.eslint,
 
+		-- C / Java / C#
+		builtins.formatting.clang_format.with({
+			runtime_condition = has_exec('clang_format'),
+		}),
+		-- C#
+		builtins.formatting.csharpier.with({
+			runtime_condition = has_exec('csharpier'),
+		}),
+		-- buf (proto)
+		builtins.formatting.buf.with({
+			runtime_condition = has_exec('buf'),
+		}),
+
 		-- Go
 		builtins.formatting.gofmt.with({
 			runtime_condition = has_exec('gofmt'),
