@@ -6,9 +6,9 @@ VIM_DATA_HOME = $(XDG_DATA_HOME)/nvim
 
 default: install
 
-install: create-dirs update-plugins
+install: create-dirs update-plugins install-yarn-package
 
-update: update-repo update-plugins
+update: update-repo update-plugins install-yarn-package
 
 upgrade: update
 
@@ -26,6 +26,10 @@ update-plugins:
 uninstall:
 	rm -rf "$(VIM_DATA_HOME)"/dein
 
+install-yarn-package:
+	yarn --cwd "$(VIM_DATA_HOME)/dein/repos/github.com/neoclide/coc.nvim/" install
+	yarn --cwd "$(VIM_DATA_HOME)/dein/repos/github.com/neoclide/coc.nvim/" build
+
 test:
 	$(info Testing NVIM 0.6.0+...)
 	$(if $(shell echo "$(nvim_version)" | egrep "NVIM v0\.[6-9]"),\
@@ -33,4 +37,4 @@ test:
 		$(error   .. You need Neovim 0.6.0 or newer))
 	@echo All tests passed, hooray!
 
-.PHONY: install create-dirs update-repo update-plugins uninstall test
+.PHONY: install create-dirs update-repo update-plugins uninstall test install-yarn-package

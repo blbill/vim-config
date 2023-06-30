@@ -37,7 +37,8 @@ require('null-ls').setup({
 		}),
 
 		-- Javascript
-		builtins.diagnostics.eslint,
+		-- builtins.diagnostics.eslint,
+		builtins.formatting.prettier,
 
 		-- C / Java / C#
 		builtins.formatting.clang_format.with({
