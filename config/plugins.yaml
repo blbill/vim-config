@@ -177,7 +177,7 @@
 - repo: lewis6991/gitsigns.nvim
   if: has('nvim-0.5')
   on_event: VimEnter
-  hook_post_source: lua require('plugins.gitsigns')
+  hook_post_source: lua require('plugins.gitsigns').setup()
 
 - repo: chentoast/marks.nvim
   if: has('nvim-0.5')
